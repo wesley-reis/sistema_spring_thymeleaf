@@ -10,25 +10,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
-	<h1 class="teal-text text-darken-1 center">Acesso ao sistema</h1>
-	
+<div class="container">	
+	<br/><br/><br/><br/><br/>
 	<div id="login-page" class="row">
     <div class="col s12 z-depth-6 card-panel">
-      <form th:action="@{/login}" method="POST" class="login-form">
+      <form th:action="@{/login}" method="POST">
         <div class="row">
+        	<h3 class="teal-text text-darken-1 center">Fazer Login</h3>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">person_outline</i>
-            <input class="validate" id="username" type="text">
+            <input class="validate" id="username" name="username" type="text">
             <label for="username" data-error="wrong" data-success="right">Login</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">lock_outline</i>
-            <input id="password" type="password">
+            <input id="password" name="password" type="password">
             <label for="password">Senha</label>
           </div>
         </div>
@@ -53,8 +53,6 @@
     </div>
   </div>
 </div>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
