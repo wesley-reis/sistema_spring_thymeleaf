@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/199/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/199/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
 <meta charset="UTF-8"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Insert title here</title>
 </head>
@@ -29,7 +32,7 @@
 
 	   <form action="/salvarpessoa" method="POST" id="formpessoa" class="col s12" th:object="${pessoaobj}">
 	     <div class="row">
-           <div class="input-field col s1">
+           <div class="input-field col s1" sec:authorize="hasAnyRole('ROLE_DESENVOLVEDOR', 'ROLE_ADMIN', 'ROLE_COORDENADOR')">
 	         <input id="id" name="id" type="number" class="validate" th:field="*{id}" readonly="readonly">
 	         <label for="id">Id</label>
 	       </div>
@@ -43,7 +46,7 @@
 	       </div>
 	     </div>
 	     <div class="row">
-	       <div class="input-field col s2">
+	       <div class="input-field col s2" sec:authorize="hasRole('ROLE_ADMIN')">
 	         <input id="idade" name="idade" type="number" class="validate" th:field="*{idade}">
 	         <label for="idade">Idade</label>
 	       </div>
@@ -106,6 +109,6 @@
 	</table>
 	   </div>    
 </div>
-	 <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
