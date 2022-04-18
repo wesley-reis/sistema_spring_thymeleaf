@@ -48,6 +48,8 @@ public class PessoaController {
 	@RequestMapping(method= RequestMethod.POST, value= "/salvarpessoa")
 	public ModelAndView salvar(@Valid Pessoa pessoa, BindingResult bindingResult) {
 		
+		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
+		
 		if(bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 			Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
@@ -105,10 +107,19 @@ public class PessoaController {
 	}
 	
 	@PostMapping("/pesquisarpessoa")
-	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
+	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa,
+			@RequestParam("pesquisasexo") String pesquisasexo) {
+		
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		
+		if(pesquisasexo != null && !pesquisasexo.isEmpty()) {
+			pessoas = pessoaRepository.findPessoaByNameSexo(nomepesquisa, pesquisasexo);
+		}else {
+			pessoas = pessoaRepository.findPessoaByName(nomepesquisa);
+		}
 		
 		ModelAndView modelView = new ModelAndView("cadastro/cadastropessoa");
-		modelView.addObject("pessoas", pessoaRepository.findPessoaByName(nomepesquisa));
+		modelView.addObject("pessoas", pessoas);
 		modelView.addObject("pessoaobj", new Pessoa());
 		return modelView;
 	}
